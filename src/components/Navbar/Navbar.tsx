@@ -15,6 +15,7 @@ import MenuItem from "@mui/material/MenuItem";
 const pages = ["Home", "Favourites", "My Recipes"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
+// Navigation Bar for the project
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -39,7 +40,17 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="fixed" sx={{ top: 0, left: 0, right: 0 }}>
+    <AppBar
+      position="fixed"
+      sx={{
+        top: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: "white",
+        color: "black",
+        boxShadow: "0px 2px 4px -1px rgba(0,0,0,0.1)",
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -53,7 +64,8 @@ function Navbar() {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              backgroundColor: "white",
+              color: "black",
               textDecoration: "none",
             }}
           >
@@ -89,7 +101,7 @@ function Navbar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: "center" }}>{page}</Typography>
+                  <Typography sx={{ textAlign: "center", color: "black" }}>{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -106,7 +118,7 @@ function Navbar() {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "black",
               textDecoration: "none",
             }}
           >
