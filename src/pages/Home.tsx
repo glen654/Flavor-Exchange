@@ -97,7 +97,7 @@ export function Home() {
           </Box>
         ) : displayedRecipes.length > 0 ? (
           <>
-            <Grid container spacing={8}>
+            <Grid container spacing={6}>
               {displayedRecipes.map((recipe) => (
                 <Grid item key={recipe.idMeal} xs={12} sm={6} md={4}>
                   <RecipeCard recipe={recipe} />

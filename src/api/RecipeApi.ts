@@ -11,16 +11,13 @@ export async function searchRecipes(query: string) {
   }
 }
 
-// recipeApi.ts
 export async function getAllRecipes() {
   try {
-    // First get the full list of meals by category
     const categoriesResponse = await fetch(
       "https://www.themealdb.com/api/json/v1/1/categories.php"
     );
     const categoriesData = await categoriesResponse.json();
-    
-    // Then fetch all meals from each category
+
     const allRecipes = [];
     for (const category of categoriesData.categories) {
       const response = await fetch(
@@ -31,11 +28,11 @@ export async function getAllRecipes() {
         allRecipes.push(...data.meals);
       }
     }
-    
-    // Remove duplicates (some recipes appear in multiple categories)
-    const uniqueRecipes = Array.from(new Set(allRecipes.map(meal => meal.idMeal)))
-      .map(id => allRecipes.find(meal => meal.idMeal === id));
-    
+
+    const uniqueRecipes = Array.from(
+      new Set(allRecipes.map((meal) => meal.idMeal))
+    ).map((id) => allRecipes.find((meal) => meal.idMeal === id));
+
     return uniqueRecipes;
   } catch (error) {
     console.error("Error fetching all recipes:", error);
