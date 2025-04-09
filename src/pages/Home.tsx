@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
 import { Header } from "../components/Header";
 import { SearchBar } from "../components/SearchBar";
-import { Grid, Box, CircularProgress, Typography, Pagination } from "@mui/material";
+import {
+  Grid,
+  Box,
+  CircularProgress,
+  Typography,
+  Pagination,
+} from "@mui/material";
 import { searchRecipes, getAllRecipes } from "../api/RecipeApi";
 import { RecipeCard } from "../components/RecipeCard";
+import { Footer } from "../components/Footer";
 
 interface Recipe {
   idMeal: string;
@@ -13,7 +20,7 @@ interface Recipe {
   strCategory: string;
 }
 
-const RECIPES_PER_PAGE = 6;
+const RECIPES_PER_PAGE = 4;
 
 export function Home() {
   const [allRecipes, setAllRecipes] = useState<Recipe[]>([]);
@@ -21,7 +28,7 @@ export function Home() {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const [searchQuery, setSearchQuery] = useState(""); 
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const loadRecipes = async () => {
@@ -41,7 +48,10 @@ export function Home() {
     setDisplayedRecipes(recipes.slice(startIndex, endIndex));
   };
 
-  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
     setPage(value);
     updateDisplayedRecipes(allRecipes, value);
   };
@@ -49,7 +59,7 @@ export function Home() {
   const handleSearch = async (query: string) => {
     setSearchQuery(query);
     setPage(1);
-    
+
     if (query.trim() === "") {
       updateDisplayedRecipes(allRecipes, 1);
       return;
@@ -122,6 +132,7 @@ export function Home() {
           </Typography>
         )}
       </Box>
+      <Footer />
     </main>
   );
 }
