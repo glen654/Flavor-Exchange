@@ -1,14 +1,68 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "../components/Header";
 import { SearchBar } from "../components/SearchBar";
+import { Grid, Box, CircularProgress, Typography, Pagination } from "@mui/material";
+import { searchRecipes, getAllRecipes } from "../api/RecipeApi";
+import { RecipeCard } from "../components/RecipeCard";
+
+interface Recipe {
+  idMeal: string;
+  strMeal: string;
+  strMealThumb: string;
+  strArea: string;
+  strCategory: string;
+}
+
+const RECIPES_PER_PAGE = 6;
 
 export function Home() {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [allRecipes, setAllRecipes] = useState<Recipe[]>([]);
+  const [displayedRecipes, setDisplayedRecipes] = useState<Recipe[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [searchQuery, setSearchQuery] = useState(""); 
 
-  function handleSearch(query: string) {
+  useEffect(() => {
+    const loadRecipes = async () => {
+      setLoading(true);
+      const recipes = await getAllRecipes();
+      setAllRecipes(recipes);
+      setTotalPages(Math.ceil(recipes.length / RECIPES_PER_PAGE));
+      updateDisplayedRecipes(recipes, 1);
+      setLoading(false);
+    };
+    loadRecipes();
+  }, []);
+
+  const updateDisplayedRecipes = (recipes: Recipe[], pageNum: number) => {
+    const startIndex = (pageNum - 1) * RECIPES_PER_PAGE;
+    const endIndex = startIndex + RECIPES_PER_PAGE;
+    setDisplayedRecipes(recipes.slice(startIndex, endIndex));
+  };
+
+  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+    updateDisplayedRecipes(allRecipes, value);
+  };
+
+  const handleSearch = async (query: string) => {
     setSearchQuery(query);
-    console.log("Searching for:", query);
-  }
+    setPage(1);
+    
+    if (query.trim() === "") {
+      updateDisplayedRecipes(allRecipes, 1);
+      return;
+    }
+
+    setLoading(true);
+    const results = await searchRecipes(query);
+    setAllRecipes(results);
+    setTotalPages(Math.ceil(results.length / RECIPES_PER_PAGE));
+    updateDisplayedRecipes(results, 1);
+    setLoading(false);
+  };
+
   return (
     <main className="w-full flex flex-col">
       <Header
@@ -20,23 +74,54 @@ export function Home() {
         }
         type="home"
       />
-      {/* Search Bar */}
+
       <div className="px-4 py-6 max-w-4xl mx-auto w-full">
         <SearchBar
-          value={searchQuery}
           onChange={handleSearch}
           placeholder="Search recipes, cuisines, ingredients..."
         />
       </div>
 
-      {/* Search Query */}
       {searchQuery && (
         <div className="px-4 py-2 text-center">
-          <p>
+          <Typography variant="h6">
             Showing results for: <strong>{searchQuery}</strong>
-          </p>
+          </Typography>
         </div>
       )}
+
+      <Box sx={{ p: 4 }}>
+        {loading ? (
+          <Box display="flex" justifyContent="center">
+            <CircularProgress />
+          </Box>
+        ) : displayedRecipes.length > 0 ? (
+          <>
+            <Grid container spacing={8}>
+              {displayedRecipes.map((recipe) => (
+                <Grid item key={recipe.idMeal} xs={12} sm={6} md={4}>
+                  <RecipeCard recipe={recipe} />
+                </Grid>
+              ))}
+            </Grid>
+
+            {totalPages > 1 && (
+              <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
+                <Pagination
+                  count={totalPages}
+                  page={page}
+                  onChange={handlePageChange}
+                  color="primary"
+                />
+              </Box>
+            )}
+          </>
+        ) : (
+          <Typography variant="h6" align="center">
+            No recipes found
+          </Typography>
+        )}
+      </Box>
     </main>
   );
 }
