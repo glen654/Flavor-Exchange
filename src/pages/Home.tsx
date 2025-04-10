@@ -22,6 +22,8 @@ interface Recipe {
 
 const RECIPES_PER_PAGE = 4;
 
+// The Home component serves as the main page, displaying a list of recipes,
+// handling search functionality, pagination, and loading state.
 export function Home() {
   const [allRecipes, setAllRecipes] = useState<Recipe[]>([]);
   const [displayedRecipes, setDisplayedRecipes] = useState<Recipe[]>([]);
@@ -30,6 +32,7 @@ export function Home() {
   const [totalPages, setTotalPages] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
 
+  // use effect for load all the recipes
   useEffect(() => {
     const loadRecipes = async () => {
       setLoading(true);
@@ -42,12 +45,14 @@ export function Home() {
     loadRecipes();
   }, []);
 
+  // Updates the recipes shown based on the current page
   const updateDisplayedRecipes = (recipes: Recipe[], pageNum: number) => {
     const startIndex = (pageNum - 1) * RECIPES_PER_PAGE;
     const endIndex = startIndex + RECIPES_PER_PAGE;
     setDisplayedRecipes(recipes.slice(startIndex, endIndex));
   };
 
+  // Handles user-initiated page changes (from the pagination UI)
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
     value: number
@@ -56,6 +61,7 @@ export function Home() {
     updateDisplayedRecipes(allRecipes, value);
   };
 
+  // Handles user search input and updates recipe list accordingly
   const handleSearch = async (query: string) => {
     setSearchQuery(query);
     setPage(1);

@@ -4,6 +4,7 @@ import banner3 from "../assets/img/banner3.jpeg";
 
 const images = [banner1, banner2, banner3];
 
+// Header image
 export function Header({ title, type }) {
   const randomImage = images[Math.floor(Math.random() * images.length)];
   return (

@@ -1,3 +1,4 @@
+// Top banner image for login  and register pages
 export function HeaderImage() {
   return (
     <div className="font-[sans-serif] relative">

@@ -3,6 +3,7 @@ import FavouritesReducer from "../reducers/FavouritesSlice";
 import RecipeReducer from "../reducers/AddRecipeSlice";
 import UserReducer from "../reducers/UserSlice";
 
+// Redux store
 export const store = configureStore({
   reducer: {
     favourite: FavouritesReducer,

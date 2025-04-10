@@ -1,3 +1,4 @@
+// Function searches for recipes based on a text query
 export async function searchRecipes(query: string) {
   try {
     const response = await fetch(
@@ -11,6 +12,8 @@ export async function searchRecipes(query: string) {
   }
 }
 
+// Function for retreives all recipes by first getting all categories,
+// then fetching recipes for each category
 export async function getAllRecipes() {
   try {
     const categoriesResponse = await fetch(
@@ -40,6 +43,7 @@ export async function getAllRecipes() {
   }
 }
 
+// Function for fetch full details for a single recipe by its ID
 export async function getRecipeDetails(id: string) {
   try {
     const response = await fetch(

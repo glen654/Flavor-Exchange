@@ -4,9 +4,11 @@ import axios from "axios";
 
 export const initialState: MyRecipe[] = [];
 
+// url for Mock api endpoint for recipes
 const BASE_URL =
   "https://67f74d0c42d6c71cca649e21.mockapi.io/api/v1/recipes/recipes";
 
+// thunk for get all custom recipes
 export const getAllRecipes = createAsyncThunk("recipe/getRecipe", async () => {
   try {
     const response = await axios.get(BASE_URL);
@@ -16,6 +18,7 @@ export const getAllRecipes = createAsyncThunk("recipe/getRecipe", async () => {
   }
 });
 
+// thunk for save custom recipes
 export const saveRecipe = createAsyncThunk(
   "recipe/saveRecipe",
   async (recipe: MyRecipe) => {

@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router";
 
+// Navigation bar for the project
 export function Navbar() {
   const navigate = useNavigate();
 

@@ -4,9 +4,11 @@ import axios from "axios";
 
 export const initialState: User[] = [];
 
+// url for mock api user endpoint
 const BASE_URL =
   "https://67f74d0c42d6c71cca649e21.mockapi.io/api/v1/recipes/users";
 
+// thunk for register user
 export const registerUser = createAsyncThunk(
   "user/register",
   async (user: User) => {
@@ -19,6 +21,7 @@ export const registerUser = createAsyncThunk(
   }
 );
 
+// thunk for login user
 export const loginUser = createAsyncThunk("user/login", async (user: User) => {
   try {
     const response = await axios.post(BASE_URL, user);

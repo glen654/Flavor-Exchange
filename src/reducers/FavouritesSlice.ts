@@ -2,6 +2,9 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Favourites } from "../models/Favourite";
 import { Recipe } from "../models/Recipe";
 
+// Initial state for the favourites slice
+// It tries to load favorite recipes from localStorage (if any),
+// otherwise it defaults to an empty array
 const initialState: Favourites = {
   favouriteRecipes: JSON.parse(localStorage.getItem("favoriteRecipes") || "[]"),
 };

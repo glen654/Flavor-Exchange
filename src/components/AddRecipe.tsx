@@ -7,6 +7,7 @@ import { AppDispatch } from "../store/Store";
 import { MyRecipe } from "../models/MyRecipe";
 import { toast } from "react-toastify";
 
+// Modal to add the custom recipes for the user
 export function AddRecipeModal({
   isOpen,
   onClose,
@@ -25,6 +26,7 @@ export function AddRecipeModal({
 
   const [recipe, setRecipe] = useState(initialRecipeState);
 
+  // Handles changes in form input fields and updates local state
   const handleChange = (e) => {
     setRecipe({
       ...recipe,
@@ -32,6 +34,7 @@ export function AddRecipeModal({
     });
   };
 
+  // Handles form submission to save recipe
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newRecipe: MyRecipe = {

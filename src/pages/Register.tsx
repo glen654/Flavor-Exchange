@@ -8,6 +8,7 @@ import { User } from "../models/User";
 import { registerUser } from "../reducers/UserSlice";
 import { Togglepage } from "../components/TogglePage";
 
+// Register page
 export function Register() {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -21,13 +22,14 @@ export function Register() {
 
   const [user, setUser] = useState(initialUserState);
 
+  // Handles changes in form input fields and updates local state
   const handleChange = (e) => {
     setUser({
       ...user,
       [e.target.name]: e.target.value,
     });
   };
-
+  // handles user register
   const handleRegisterUser = () => {
     const newUser: User = {
       ...user,
@@ -44,6 +46,7 @@ export function Register() {
     handleRegisterUser();
   };
 
+  // handles toggle to the login page
   const handleToggle = () => {
     navigate("/");
   };

@@ -1,3 +1,4 @@
+// Button for the login and register pages
 export function AuthButton({ children, handleClick }) {
   return (
     <>

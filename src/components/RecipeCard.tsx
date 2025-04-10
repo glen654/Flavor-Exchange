@@ -17,6 +17,7 @@ import { Recipe } from "../models/Recipe";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite } from "../reducers/FavouritesSlice";
 
+// Component for the recipe card
 export function RecipeCard({ recipe }: { recipe: Recipe }) {
   const [isShared, setIsShared] = useState(false);
   const dispatch = useDispatch();
@@ -27,10 +28,12 @@ export function RecipeCard({ recipe }: { recipe: Recipe }) {
 
   const isFavorite = favouriteRecipes.some((r) => r.idMeal === recipe.idMeal);
 
+  // Handles adding favourite recipes
   const handleFavoriteClick = () => {
     dispatch(toggleFavorite(recipe));
   };
 
+  // Handles recipe sharing
   const handleShareClick = () => {
     if (navigator.share) {
       navigator

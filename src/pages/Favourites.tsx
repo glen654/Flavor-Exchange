@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { RecipeCard } from "../components/RecipeCard";
 import { Footer } from "../components/Footer";
 
+// Favourites page
 export function Favourites() {
   const favouriteRecipes = useSelector(
     (state) => state.favourite.favouriteRecipes

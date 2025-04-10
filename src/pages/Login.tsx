@@ -21,6 +21,7 @@ export function Login() {
 
   const [user, setUser] = useState(initialUserState);
 
+  // Handles changes in form input fields and updates local state
   const handleChange = (e) => {
     setUser({
       ...user,
@@ -28,6 +29,7 @@ export function Login() {
     });
   };
 
+  // handles user login
   const handleUserLogin = () => {
     const newUser: User = {
       ...user,
@@ -45,6 +47,7 @@ export function Login() {
     handleUserLogin();
   };
 
+  // handles toggle for the register page
   const handleToggle = () => {
     navigate("/register");
   };

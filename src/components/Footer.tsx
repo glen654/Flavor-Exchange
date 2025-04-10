@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 
+// Footer component
 export function Footer() {
   return (
     <footer className="w-full bg-gray-800 text-white py-6 mt-10">

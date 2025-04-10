@@ -5,11 +5,13 @@ import { useEffect, useState } from "react";
 import { getAllRecipes } from "../reducers/AddRecipeSlice";
 import { AppDispatch } from "../store/Store";
 
+// Page for my custom recipes
 export function MyRecipes() {
   const myRecipes = useSelector((state) => state.recipes);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
 
+  // use effect for load all my recipes
   useEffect(() => {
     if (myRecipes.length === 0) {
       dispatch(getAllRecipes());

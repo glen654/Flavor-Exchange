@@ -1,3 +1,4 @@
+// Toggle page for register and login pages
 export function Togglepage({ children, onClick }) {
   return (
     <>

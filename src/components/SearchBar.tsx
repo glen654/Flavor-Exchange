@@ -7,7 +7,9 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
+import { SearchBarProps } from "../models/SearchBarProps";
 
+// Search text field
 const SearchTextField = styled(TextField)(function ({ theme }) {
   return {
     "& .MuiOutlinedInput-root": {
@@ -28,12 +30,7 @@ const SearchTextField = styled(TextField)(function ({ theme }) {
   };
 });
 
-interface SearchBarProps {
-  value: string;
-  onChange: (value: string) => void;
-  placeholder?: string;
-}
-
+// Searchbar component
 export function SearchBar(props: SearchBarProps) {
   const { value, onChange, placeholder = "Search..." } = props;
 
