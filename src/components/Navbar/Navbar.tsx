@@ -10,7 +10,7 @@ export function Navbar() {
           <nav className="flex-1 flex justify-center">
             <ul className="flex text-black space-x-8">
               <Link
-                to="/"
+                to="/home"
                 className="cursor-pointer hover:text-blue-600 transition-colors duration-200"
               >
                 Home

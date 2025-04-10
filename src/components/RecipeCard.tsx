@@ -18,7 +18,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite } from "../reducers/FavouritesSlice";
 
 export function RecipeCard({ recipe }: { recipe: Recipe }) {
-  // const [isFavorite, setIsFavorite] = useState(false);
   const [isShared, setIsShared] = useState(false);
   const dispatch = useDispatch();
 

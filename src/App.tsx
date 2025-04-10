@@ -10,7 +10,7 @@ function App() {
       path: "",
       element: <RootLayout />,
       children: [
-        { path: "/", element: <Home /> },
+        { path: "/home", element: <Home /> },
         { path: "/favourites", element: <Favourites /> },
         { path: "/myrecipes", element: <MyRecipes /> },
       ],
