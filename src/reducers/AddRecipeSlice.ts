@@ -48,9 +48,13 @@ const myRecipesSlice = createSlice({
       });
     builder
       .addCase(getAllRecipes.fulfilled, (state, action) => {
-        action.payload.map((recipe: MyRecipe) => {
-          state.push(recipe);
-        });
+        const fetchedRecipes = action.payload;
+        const uniqueRecipes = [
+          ...new Map(
+            fetchedRecipes.map((recipe) => [recipe.id, recipe])
+          ).values(),
+        ];
+        return uniqueRecipes;
       })
       .addCase(getAllRecipes.rejected, (state, action) => {
         console.error("Failed to load Recipe data", action.payload);

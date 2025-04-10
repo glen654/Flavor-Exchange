@@ -40,21 +40,23 @@ export function MyRecipes() {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
-      <button
-        onClick={() => setIsModalOpen(true)}
-        className="flex items-center bg-green-500 text-white px-6 py-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75"
-      >
-        Add Recipe
-      </button>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 p-4">
+      <div className="col-span-1 md:col-span-2 flex justify-center mb-4">
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="bg-green-500 text-white px-6 py-3 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75"
+        >
+          Add Recipe
+        </button>
+      </div>
+      {myRecipes.map((recipe) => (
+        <RecipeCard key={recipe.id} recipe={recipe} />
+      ))}
 
       <AddRecipeModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
-      {myRecipes.map((recipe) => (
-        <RecipeCard key={recipe.title} recipe={recipe} />
-      ))}
     </div>
   );
 }
