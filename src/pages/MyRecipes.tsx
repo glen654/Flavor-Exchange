@@ -4,7 +4,6 @@ import { AddRecipeModal } from "../components/AddRecipe";
 import { useEffect, useState } from "react";
 import { getAllRecipes } from "../reducers/AddRecipeSlice";
 import { AppDispatch } from "../store/Store";
-import { MyRecipe } from "../models/MyRecipe";
 
 export function MyRecipes() {
   const myRecipes = useSelector((state) => state.recipes);
@@ -12,10 +11,10 @@ export function MyRecipes() {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    console.log(myRecipes);
-    
-    dispatch(getAllRecipes());
-  },[dispatch])
+    if (myRecipes.length === 0) {
+      dispatch(getAllRecipes());
+    }
+  }, [dispatch, myRecipes.length]);
 
   if (myRecipes.length === 0) {
     return (
@@ -51,8 +50,8 @@ export function MyRecipes() {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
-      {myRecipes.map((recipe: MyRecipe) => (
-        <RecipeCard key={recipe.id} recipe={recipe} />
+      {myRecipes.map((recipe) => (
+        <RecipeCard key={recipe.title} recipe={recipe} />
       ))}
     </div>
   );

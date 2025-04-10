@@ -9,7 +9,7 @@ export function Navbar() {
 
   return (
     <>
-      <header className="bg-white shadow-lg">
+      <header className="bg-white shadow-lg z-20 relative">
         <div className="container mx-auto flex justify-between items-center px-4 py-3">
           <h2 className="text-black font-bold text-xl">Flavor Exchange</h2>
 
@@ -60,7 +60,7 @@ export function Navbar() {
           <div className="flex items-center pl-4">
             <button
               onClick={handleLogOut}
-              className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-200"
+              className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors duration-200"
             >
               Logout
             </button>
