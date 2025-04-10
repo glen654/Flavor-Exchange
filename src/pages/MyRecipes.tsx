@@ -1,3 +1,5 @@
 export function MyRecipes() {
-  return <></>;
+  return <>
+    <h1>My recipes</h1>
+  </>;
 }

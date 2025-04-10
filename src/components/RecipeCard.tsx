@@ -13,21 +13,23 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShareIcon from "@mui/icons-material/Share";
 import { useState } from "react";
-
-interface Recipe {
-  idMeal: string;
-  strMeal: string;
-  strMealThumb: string;
-  strArea: string;
-  strCategory: string;
-}
+import { Recipe } from "../models/Recipe";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleFavorite } from "../reducers/FavouritesSlice";
 
 export function RecipeCard({ recipe }: { recipe: Recipe }) {
-  const [isFavorite, setIsFavorite] = useState(false);
+  // const [isFavorite, setIsFavorite] = useState(false);
   const [isShared, setIsShared] = useState(false);
+  const dispatch = useDispatch();
+
+  const favouriteRecipes = useSelector(
+    (state) => state.favourite.favouriteRecipes
+  );
+
+  const isFavorite = favouriteRecipes.some((r) => r.idMeal === recipe.idMeal);
 
   const handleFavoriteClick = () => {
-    setIsFavorite(!isFavorite);
+    dispatch(toggleFavorite(recipe));
   };
 
   const handleShareClick = () => {

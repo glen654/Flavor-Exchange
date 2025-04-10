@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 export function Navbar() {
   return (
@@ -9,32 +9,29 @@ export function Navbar() {
 
           <nav className="flex-1 flex justify-center">
             <ul className="flex text-black space-x-8">
-              <li>
-                <Link to="/" className="hover:text-blue-600 transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/favourites"
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Favourites
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/myrecipes"
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  My Recipes
-                </Link>
-              </li>
+              <Link
+                to="/"
+                className="cursor-pointer hover:text-blue-600 transition-colors duration-200"
+              >
+                Home
+              </Link>
+              <Link
+                to="/favourites"
+                className="cursor-pointer hover:text-blue-600 transition-colors duration-200"
+              >
+                Favourites
+              </Link>
+              <Link
+                to="/myrecipes"
+                className="cursor-pointer hover:text-blue-600 transition-colors duration-200"
+              >
+                My Recipes
+              </Link>
             </ul>
           </nav>
 
           <div className="flex items-center">
-            <button className="text-black hover:text-blue-600">
+            <button className="text-black hover:text-blue-600 cursor-pointer transition-colors duration-200">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
